@@ -9,12 +9,27 @@ import { TableColumn } from "react-data-table-component";
 
 const columns: TableColumn<IDataRow>[] = [
   {
-    name: "Title",
+    name: "Nome:",
     selector: (row) => row.title,
     sortable: true,
   },
   {
-    name: "Year",
+    name: "Categoria:",
+    selector: (row) => row.year,
+    sortable: true,
+  },
+  {
+    name: "Validade:",
+    selector: (row) => row.year,
+    sortable: true,
+  },
+  {
+    name: "Estoque:",
+    selector: (row) => row.year,
+    sortable: true,
+  },
+  {
+    name: "Status:",
     selector: (row) => row.year,
     sortable: true,
   },
@@ -28,6 +43,26 @@ const data: IDataRow[] = [
   },
   {
     id: 2,
+    title: "Ghostbusters",
+    year: "1984",
+  },
+  {
+    id: 3,
+    title: "Ghostbusters",
+    year: "1984",
+  },
+  {
+    id: 4,
+    title: "Ghostbusters",
+    year: "1984",
+  },
+  {
+    id: 5,
+    title: "Ghostbusters",
+    year: "1984",
+  },
+  {
+    id: 6,
     title: "Ghostbusters",
     year: "1984",
   },
