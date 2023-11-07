@@ -3,5 +3,5 @@
 @tailwind utilities;
 
 body {
-  @apply bg-background;
+  @apply bg-background selection:text-slate-100 selection:bg-orange-400;
 }
