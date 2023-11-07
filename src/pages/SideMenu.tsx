@@ -29,7 +29,7 @@ const SideMenu: React.FC = () => {
             />
 
             <div className="flex flex-col gap-0">
-              <h4 className="text-lg">Olá Miguel Bizzi</h4>
+              <h4 className="text-lg">Olá Miguel Bizzi </h4>
               <a className="text-sm text-orange-600 font-bold cursor-pointer -mt-0.5">
                 Exibir perfil
               </a>
