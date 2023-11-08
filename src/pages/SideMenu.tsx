@@ -49,7 +49,7 @@ const SideMenu: React.FC = () => {
         </div>
       </div>
 
-      <div className="flex-1 p-6">
+      <div className="flex-1 p-6 max-h-screen">
         <Outlet />
       </div>
     </div>

@@ -1,15 +1,18 @@
-import DataTable, { TableProps } from "react-data-table-component";
+import DataTable, {
+  PaginationOptions,
+  TableProps,
+} from "react-data-table-component";
 import { CgSortAz } from "react-icons/cg";
 
 const sortIcon = <CgSortAz />;
 const selectProps = {
   indeterminate: (isIndeterminate: boolean) => isIndeterminate,
 };
-const paginationComponentOptions = {
-  rowsPerPageText: "Linhas por página",
+const paginationComponentOptions: PaginationOptions = {
   rangeSeparatorText: "de",
-  selectAllRowsItem: true,
+  selectAllRowsItem: false,
   selectAllRowsItemText: "Todos",
+  noRowsPerPage: true,
 };
 
 function DataTableBase<T>(props: TableProps<T>): JSX.Element {
@@ -20,8 +23,6 @@ function DataTableBase<T>(props: TableProps<T>): JSX.Element {
       sortIcon={sortIcon}
       responsive
       paginationComponentOptions={paginationComponentOptions}
-      fixedHeader
-      fixedHeaderScrollHeight="300px"
       {...props}
     />
   );

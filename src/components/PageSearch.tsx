@@ -5,7 +5,7 @@ import { FaSearch } from "react-icons/fa";
 
 const PageSearch: React.FC = () => {
   return (
-    <div className="flex relative max-w-2xl mb-6">
+    <div className="flex flex-1 relative max-w-2xl h-10 mb-6">
       <FaSearch className="absolute self-center top-3 left-3 text-gray-500" />
       <input
         type="text"

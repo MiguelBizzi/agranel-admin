@@ -1,87 +1,104 @@
-import React from "react";
+import React, { useState } from "react";
 import PageTitle from "../components/PageTitle";
 import PageSearch from "../components/PageSearch";
 
 // import { Container } from './styles';
 import DataTableBase from "../components/DataTableBase";
-import { IDataRow } from "../dtos/IDataRow";
 import { TableColumn } from "react-data-table-component";
-
-const columns: TableColumn<IDataRow>[] = [
-  {
-    name: "Nome:",
-    selector: (row) => row.title,
-    sortable: true,
-  },
-  {
-    name: "Categoria:",
-    selector: (row) => row.year,
-    sortable: true,
-  },
-  {
-    name: "Validade:",
-    selector: (row) => row.year,
-    sortable: true,
-  },
-  {
-    name: "Estoque:",
-    selector: (row) => row.year,
-    sortable: true,
-  },
-  {
-    name: "Status:",
-    selector: (row) => row.year,
-    sortable: true,
-  },
-];
-
-const data: IDataRow[] = [
-  {
-    id: 1,
-    title: "Beetlejuice",
-    year: "1988",
-  },
-  {
-    id: 2,
-    title: "Ghostbusters",
-    year: "1984",
-  },
-  {
-    id: 3,
-    title: "Ghostbusters",
-    year: "1984",
-  },
-  {
-    id: 4,
-    title: "Ghostbusters",
-    year: "1984",
-  },
-  {
-    id: 5,
-    title: "Ghostbusters",
-    year: "1984",
-  },
-  {
-    id: 6,
-    title: "Ghostbusters",
-    year: "1984",
-  },
-];
+import { FaPencilAlt, FaTimes } from "react-icons/fa";
+import PageAddButton from "../components/PageAddButton";
+import PageActionButton from "../components/PageActionButton";
+import { useSelector } from "react-redux";
+import { AppDispatch, RootState } from "../store/store";
+import { IProduto } from "../dtos/IProduto";
+import { useDispatch } from "react-redux";
+import { deleteProduct } from "../store/slices/products/productsSlice";
+import { AnimatePresence } from "framer-motion";
+import EditStorageModal from "../components/modals/EditStorageModal";
 
 const StorageManagement: React.FC = () => {
+  const [modalOpen, setModalOpen] = useState<boolean>(false);
+
+  const products = useSelector((root: RootState) => root.products.products);
+  const dispatch = useDispatch<AppDispatch>();
+
+  const handleEdit = () => {
+    openModal();
+  };
+
+  const handleDelete = (row: IProduto) => {
+    dispatch(deleteProduct(row.produto_id));
+  };
+
+  const closeModal = () => setModalOpen(false);
+  const openModal = () => setModalOpen(true);
+
+  const columns: TableColumn<IProduto>[] = [
+    {
+      name: "Nome:",
+      selector: (row) => row.nome,
+      sortable: true,
+    },
+    {
+      name: "Categoria:",
+      selector: (row) => row.categoria,
+      sortable: true,
+    },
+    {
+      name: "Possui Validade:",
+      selector: (row) => (row.possuiValidade ? "Sim" : "Não"),
+      sortable: true,
+    },
+    {
+      name: "Estoque:",
+      selector: (row) => row.estoque,
+      sortable: true,
+    },
+    {
+      name: "Status:",
+      selector: (row) => (row.status ? "Ativo" : "Inativo"),
+      sortable: true,
+    },
+    {
+      name: "Ações:",
+      cell: (row) => (
+        <div className="flex gap-2 text-white">
+          <PageActionButton
+            background="hover:bg-blue-600 bg-blue-400"
+            onClick={() => openModal()}
+            icon={<FaPencilAlt />}
+          />
+          <PageActionButton
+            background="bg-red-400 hover:bg-red-600"
+            onClick={() => handleDelete(row)}
+            icon={<FaTimes />}
+          />
+        </div>
+      ),
+    },
+  ];
+
   return (
-    <div>
+    <div className="max-h-screen">
       <PageTitle title="Gestão de estoque" />
 
-      <PageSearch />
+      <div className="flex gap-4">
+        <PageSearch />
+        <PageAddButton />
+      </div>
 
       <DataTableBase
-        pagination
         columns={columns}
-        data={data}
+        data={products}
         highlightOnHover
         pointerOnHover
+        onRowClicked={handleEdit}
+        noDataComponent={<h1>Nenhum produdo disponível</h1>}
       />
+
+      <AnimatePresence initial={false} mode="wait" onExitComplete={() => null}>
+        {modalOpen && <EditStorageModal handleClose={closeModal} />}
+      </AnimatePresence>
     </div>
   );
 };
