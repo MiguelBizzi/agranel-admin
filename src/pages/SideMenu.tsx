@@ -1,7 +1,7 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
 import { FaArrowLeft } from "react-icons/fa";
-import Logo from "../../public/logo.png";
+import Logo from "/logo.png";
 import NoProfileImage from "../assets/noprofile.webp";
 import SIDE_ITEMS_DATA from "../constants/sideItemsData";
 import SideBarItem from "../components/SideBarItem";
