@@ -16,6 +16,10 @@ export const productsSlide = createSlice({
   name: "products",
   initialState,
   reducers: {
+    addProduct: (state, action: PayloadAction<IProduto>) => {
+      state.products = [action.payload, ...state.products];
+      return state;
+    },
     changeProduct: (state, action: PayloadAction<IProduto>) => {
       state.products = state.products.map((p) => {
         if (p.produto_id === action.payload.produto_id) {
@@ -36,6 +40,7 @@ export const productsSlide = createSlice({
   },
 });
 
-export const { changeProduct, deleteProduct } = productsSlide.actions;
+export const { addProduct, changeProduct, deleteProduct } =
+  productsSlide.actions;
 
 export default productsSlide.reducer;

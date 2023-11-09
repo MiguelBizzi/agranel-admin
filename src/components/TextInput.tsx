@@ -1,9 +1,9 @@
 import React, { InputHTMLAttributes } from "react";
 
 interface Props extends InputHTMLAttributes<HTMLInputElement> {
-  defaultValue: string | number;
   id: string;
   label: string;
+  defaultValue?: string | number;
   disabled?: boolean;
   required?: boolean;
   type?: string;
@@ -12,7 +12,7 @@ interface Props extends InputHTMLAttributes<HTMLInputElement> {
 const TextInput: React.FC<Props> = ({
   id,
   label,
-  defaultValue,
+  defaultValue = "",
   disabled,
   required = true,
   type = "text",
