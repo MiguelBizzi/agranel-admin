@@ -1,25 +1,25 @@
 import React from "react";
 import { motion } from "framer-motion";
 import Backdrop from "./Backdrop";
-import { IProduto } from "../../dtos/IProduto";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../store/store";
-import { deleteProduct } from "../../store/slices/products/productsSlice";
 import { toast } from "react-toastify";
 import modalAnimation from "../../constants/modalAnimation";
+import { IUser } from "../../dtos/IUser";
+import { deleteUser } from "../../store/slices/auth/authSlice";
 
 interface Props {
   handleClose: () => void;
-  product: IProduto;
+  userSelected: IUser;
 }
 
-const DeleteProductModal: React.FC<Props> = ({ handleClose, product }) => {
+const DeleteUserModal: React.FC<Props> = ({ handleClose, userSelected }) => {
   const dispatch = useDispatch<AppDispatch>();
 
   const handleDelete = () => {
-    dispatch(deleteProduct(product.produto_id));
+    dispatch(deleteUser(userSelected.user_id));
 
-    toast.success("Produto deletado com sucesso!", {
+    toast.success("Usuário deletado com sucesso!", {
       position: "top-right",
       autoClose: 5000,
       hideProgressBar: false,
@@ -44,10 +44,10 @@ const DeleteProductModal: React.FC<Props> = ({ handleClose, product }) => {
         exit="exit"
       >
         <h1 className="text-2xl text-gray-600 font-bold mb-2">
-          Deseja excluir o produto?
+          Deseja excluir o usuário?
         </h1>
         <p className="text-sm text-gray-500">
-          Ao clicar no botão excluir o produto será excluido do sistema!
+          Ao clicar no botão excluir o usuário será excluido do sistema!
         </p>
 
         <div className="flex mt-8 gap-4 justify-center items-center">
@@ -69,4 +69,4 @@ const DeleteProductModal: React.FC<Props> = ({ handleClose, product }) => {
   );
 };
 
-export default DeleteProductModal;
+export default DeleteUserModal;
