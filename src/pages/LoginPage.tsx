@@ -16,17 +16,21 @@ const LoginPage: React.FC = () => {
     const password = formData.get("password") as string;
 
     if (users.some((u) => u.username === userName && u.password === password)) {
-      dispatch(signIn(users.find((u) => u.username === userName)));
-      toast.success("Credenciais corretas! Entrando na aplicação...", {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-      });
+      const userToAdd = users.find((u) => u.username === userName);
+      if (userToAdd) {
+        dispatch(signIn(userToAdd));
+
+        toast.success("Credenciais corretas! Entrando na aplicação...", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+      }
     } else {
       toast.error("Credenciais incorretas! Tente novamente!", {
         position: "top-right",
