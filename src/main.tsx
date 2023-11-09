@@ -4,11 +4,12 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import SideMenu from "./pages/SideMenu.tsx";
 import ErrorPage from "./pages/ErrorPage.tsx";
-import StorageManagement from "./pages/StorageManagement.tsx";
 import UsersManagement from "./pages/UsersManagement.tsx";
-import ProductsManagement from "./pages/ProductsManagement.tsx";
 import { Provider } from "react-redux";
 import { store } from "./store/store.ts";
+import ProductsManagement from "./pages/ProductsManagement.tsx";
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer } from "react-toastify";
 
 const router = createBrowserRouter([
   {
@@ -17,16 +18,12 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
     children: [
       {
-        path: "storage",
-        element: <StorageManagement />,
+        path: "products",
+        element: <ProductsManagement />,
       },
       {
         path: "users",
         element: <UsersManagement />,
-      },
-      {
-        path: "products",
-        element: <ProductsManagement />,
       },
     ],
   },
@@ -37,5 +34,6 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
     <Provider store={store}>
       <RouterProvider router={router} />
     </Provider>
+    <ToastContainer />
   </React.StrictMode>
 );

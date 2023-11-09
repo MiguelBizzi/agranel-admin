@@ -16,16 +16,10 @@ export const productsSlide = createSlice({
   name: "products",
   initialState,
   reducers: {
-    changeStorage: (
-      state,
-      action: PayloadAction<{ id: number; storage: number }>
-    ) => {
+    changeProduct: (state, action: PayloadAction<IProduto>) => {
       state.products = state.products.map((p) => {
-        if (p.produto_id === action.payload.id) {
-          return {
-            ...p,
-            estoque: action.payload.storage,
-          };
+        if (p.produto_id === action.payload.produto_id) {
+          return action.payload;
         }
 
         return p;
@@ -42,6 +36,6 @@ export const productsSlide = createSlice({
   },
 });
 
-export const { changeStorage, deleteProduct } = productsSlide.actions;
+export const { changeProduct, deleteProduct } = productsSlide.actions;
 
 export default productsSlide.reducer;

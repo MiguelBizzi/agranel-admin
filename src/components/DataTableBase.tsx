@@ -1,6 +1,7 @@
 import DataTable, {
   PaginationOptions,
   TableProps,
+  TableStyles,
 } from "react-data-table-component";
 import { CgSortAz } from "react-icons/cg";
 
@@ -15,6 +16,15 @@ const paginationComponentOptions: PaginationOptions = {
   noRowsPerPage: true,
 };
 
+const customStyles: TableStyles = {
+  headCells: {
+    style: {
+      fontWeight: "bold",
+      fontSize: "0.8rem",
+    },
+  },
+};
+
 function DataTableBase<T>(props: TableProps<T>): JSX.Element {
   return (
     <DataTable
@@ -23,6 +33,7 @@ function DataTableBase<T>(props: TableProps<T>): JSX.Element {
       sortIcon={sortIcon}
       responsive
       paginationComponentOptions={paginationComponentOptions}
+      customStyles={customStyles}
       {...props}
     />
   );
